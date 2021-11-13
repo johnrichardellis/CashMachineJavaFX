@@ -34,7 +34,7 @@ public class Bank {
         )));
 
         accounts.put(4, new PremiumAccount(new AccountData(
-            4, "AI", "theAnswerPrem@gmail.com", -50F                      // Allen Iverson
+                4, "AI", "theAnswerPrem@gmail.com", -50F                      // Allen Iverson
         )));
 
     }
