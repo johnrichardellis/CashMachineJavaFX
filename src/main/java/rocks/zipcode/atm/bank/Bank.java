@@ -22,19 +22,19 @@ public class Bank {
         )));
 
         accounts.put(1, new BasicAccount(new AccountData(
-                1, "Lou the Dog", "iAmADog@gmail.com", 24500F                // lou dog user
+                1, "Lou the Dog", "iAmADog@gmail.com", 50F                // lou dog user
         )));
 
         accounts.put(2, new BasicAccount(new AccountData(
-                2, "Henry the Cat", "IamACat@gmail.com", 2F                // henry the cat
+                2, "Henry the Cat", "iAmACat@gmail.com", 20F                // henry the cat
         )));
 
         accounts.put(3, new PremiumAccount(new AccountData(
-                3, "James Franklin", "jimmyPSU@psu.edu", 88000000F          // James Franklin
+                3, "James Franklin", "jimmyPSUprem@psu.edu", 88000000F          // James Franklin
         )));
 
         accounts.put(4, new PremiumAccount(new AccountData(
-            4, "AI", "theAnswer@gmail.com", 50F                      // Allen Iverson
+            4, "AI", "theAnswerPrem@gmail.com", -50F                      // Allen Iverson
         )));
 
     }
