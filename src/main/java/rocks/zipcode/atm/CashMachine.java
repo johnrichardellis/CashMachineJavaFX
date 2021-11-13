@@ -22,25 +22,25 @@ public class CashMachine {
         accountData = data;
     };
 
-    public void login(int id) {
-        tryCall(
+    public void login(int id) {                                         // method login parameter id
+        tryCall(                                                        // calls bank class to obtain id
                 () -> bank.getAccountById(id),
                 update
         );
     }
 
-    public void deposit(int amount) {
-        if (accountData != null) {
-            tryCall(
+    public void deposit(int amount) {                                   // method deposit parameter amount
+        if (accountData != null) {                                      // if accountData variable is not null
+            tryCall(                                                    // deposit the amount and update
                     () -> bank.deposit(accountData, amount),
                     update
             );
         }
     }
 
-    public void withdraw(int amount) {
-        if (accountData != null) {
-            tryCall(
+    public void withdraw(int amount) {                                  // withdraw method with amount parameter
+        if (accountData != null) {                                      // if accountData variable is not null
+            tryCall(                                                    //
                     () -> bank.withdraw(accountData, amount),
                     update
             );
@@ -55,7 +55,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return accountData != null ? accountData.toString() : "Please enter a valid account number then click submit";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
