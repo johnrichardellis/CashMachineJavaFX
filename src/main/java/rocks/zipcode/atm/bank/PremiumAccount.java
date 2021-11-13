@@ -16,3 +16,6 @@ public class PremiumAccount extends Account {
         return getBalance() + OVERDRAFT_LIMIT >= amount;
     }
 }
+
+
+// PREMIUM ACCT is the same as a basic acct but it has overdraft protection up to $100.00

@@ -16,53 +16,123 @@ import javafx.scene.layout.FlowPane;
  */
 public class CashMachineApp extends Application {
 
-    private TextField field = new TextField();
+    private TextField accountIdField = new TextField();
+    private TextField depositField = new TextField();
+    private TextField withdrawField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
+    public void disableButtons() {
+
+    }
+
     private Parent createContent() {
-        VBox vbox = new VBox(10);                               // spacing around the buttons
-        vbox.setPrefSize(600, 600);                 // window size 600x600
+        VBox vbox = new VBox(20);                               // gray spacing around the buttons
+        vbox.setPrefSize(800, 800);                 // window size 600x600 default
 
         TextArea areaInfo = new TextArea();
 
-        Button btnSubmit = new Button("Set Account ID");            // account ID button
+        Button btnLogin = new Button("Please Login");
+        Button btnSubmit = new Button("Set Account ID");
+        Button btnDeposit = new Button("Deposit");
+        Button btnWithdraw = new Button("Withdraw");
+        Button btnExit = new Button("Logout");
+
+        btnLogin.setDisable(false);
+        btnSubmit.setDisable(true);
+        btnDeposit.setDisable(true);
+        btnWithdraw.setDisable(true);
+        btnExit.setDisable(true);
+
+
+
+//        /////////////////////////////////////////////  below is a newly created login button
+//        /////////////////////////////////////////////
+//
+//
+//                                          button enabled on startup
+//        btnLogin.setOnAction(e -> {
+//            int id = Integer.parseInt(accountIdField.getText()); // this needs to be changed. variable needs to be created as well
+//            cashMachine.login(id);
+//
+//            areaInfo.setText(cashMachine.toString());
+//        });
+//
+//        /////////////////////////////////////////////
+
+        // account ID button
+        // button disabled on startup
+
         btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
+            int id = Integer.parseInt(accountIdField.getText());
             cashMachine.login(id);
+//            fieldlogin.setText("");
+            btnDeposit.setDisable(false);
+            btnWithdraw.setDisable(false);
+            btnSubmit.setDisable(true);
+            btnExit.setDisable(false);
 
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnDeposit = new Button("Deposit");              // deposit button
+        // deposit button
+        // button disabled on startup
+
         btnDeposit.setOnAction(e -> {
-            Float amount = Float.parseFloat(field.getText());
+            Float amount = Float.parseFloat(accountIdField.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnWithdraw = new Button("Withdraw");            // withdraw button
+        // withdraw button
+        // button disabled on startup
+
         btnWithdraw.setOnAction(e -> {
-            Float amount = Float.parseFloat(field.getText());
+            Float amount = Float.parseFloat(accountIdField.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnExit = new Button("Exit");                    // exit button
+        // Logout button
+        // button disabled on startup
+
         btnExit.setOnAction(e -> {
             cashMachine.exit();
 
             areaInfo.setText(cashMachine.toString());
         });
 
+
+
         FlowPane flowpane = new FlowPane();
 
+
+        // these are all the buttons included in this program to program
+        flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
+
+        // these flowpanes place the text fields and buttons at the top of the window all in succession, top to bottom
+        FlowPane flowPaneAccountId = new FlowPane();
+        flowPaneAccountId.getChildren().add(accountIdField);
+        flowPaneAccountId.getChildren().add(btnLogin);
+
+        FlowPane flowPaneDeposit = new FlowPane();
+        flowPaneDeposit.getChildren().add(depositField);
+        flowPaneDeposit.getChildren().add(btnDeposit);
+
+        FlowPane flowPaneWithdraw = new FlowPane();
+        flowPaneWithdraw.getChildren().add(withdrawField);
+        flowPaneWithdraw.getChildren().add(btnWithdraw);
+
+
+
+        // the vbox is the virtualbox, and added are the following parameters
+        // this is what will be shown on the virtualbox
+        vbox.getChildren().addAll(flowPaneAccountId, flowPaneDeposit, flowPaneWithdraw, flowpane, areaInfo);
         return vbox;
     }
 
