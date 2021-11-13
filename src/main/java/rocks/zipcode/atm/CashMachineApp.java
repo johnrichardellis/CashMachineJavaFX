@@ -62,6 +62,7 @@ public class CashMachineApp extends Application {
             btnWithdraw.setDisable(false);
             btnExit.setDisable(false);
 
+
             areaInfo.setText(cashMachine.toString());
         });
 
@@ -83,6 +84,7 @@ public class CashMachineApp extends Application {
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
+
         });
 
         // Logout button
@@ -94,6 +96,8 @@ public class CashMachineApp extends Application {
             btnDeposit.setDisable(true);
             btnWithdraw.setDisable(true);
             btnExit.setDisable(true);
+            clearTextFields();
+
 
             areaInfo.setText(cashMachine.toString());
         });
@@ -134,6 +138,12 @@ public class CashMachineApp extends Application {
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(createContent()));
         stage.show();                                                       // this shows the larger stage window
+    }
+
+    public void clearTextFields() {
+        accountIdField.clear();
+        depositField.clear();
+        withdrawField.clear();
     }
 
     public static void main(String[] args) {
