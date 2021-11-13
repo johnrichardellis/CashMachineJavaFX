@@ -9,9 +9,9 @@ public final class AccountData {
     private final String name;
     private final String email;
 
-    private final int balance;
+    private final Float balance;
 
-    AccountData(int id, String name, String email, int balance) {               // constructor for new account
+    AccountData(int id, String name, String email, Float balance) {               // constructor for new account
         this.id = id;
         this.name = name;
         this.email = email;
@@ -30,7 +30,7 @@ public final class AccountData {
         return email;
     }                                   // getter email
 
-    public int getBalance() {
+    public Float getBalance() {
         return balance;
     }                                   // getter balance
 

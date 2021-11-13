@@ -29,7 +29,7 @@ public class CashMachine {
         );
     }
 
-    public void deposit(int amount) {                                   // method deposit parameter amount
+    public void deposit(Float amount) {                                   // method deposit parameter amount
         if (accountData != null) {                                      // if accountData variable is not null
             tryCall(                                                    // deposit the amount and update
                     () -> bank.deposit(accountData, amount),
@@ -38,7 +38,7 @@ public class CashMachine {
         }
     }
 
-    public void withdraw(int amount) {                                  // withdraw method with amount parameter
+    public void withdraw(Float amount) {                                  // withdraw method with amount parameter
         if (accountData != null) {                                      // if accountData variable is not null
             tryCall(                                                    //
                     () -> bank.withdraw(accountData, amount),
