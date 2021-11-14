@@ -28,6 +28,8 @@ public class CashMachineApp extends Application {
 
     }
 
+
+
     private Parent createContent() {
         VBox vbox = new VBox(10);                               // gray spacing around the buttons
         vbox.setPrefSize(500, 300);                 // window size 600x600 default
@@ -140,10 +142,13 @@ public class CashMachineApp extends Application {
         stage.show();                                                       // this shows the larger stage window
     }
 
+
+    // method to clear all text fields--can call whenever needed
     public void clearTextFields() {
         accountIdField.clear();
         depositField.clear();
         withdrawField.clear();
+
     }
 
     public static void main(String[] args) {

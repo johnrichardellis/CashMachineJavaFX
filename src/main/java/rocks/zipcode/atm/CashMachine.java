@@ -55,7 +55,7 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Please enter a valid account number then click submit";
+        return accountData != null ? accountData.toString() : "You are logged out. \n \nPlease enter a valid account ID number.";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
