@@ -43,12 +43,12 @@ public final class AccountData {
                    "Account id: " + id + '\n' +
                    "Name: " + name + '\n' +
                    "Email: " + email + '\n' +
-                   "Balance: " + overDraftWarning;
+                   "Balance: $" + overDraftWarning;
        }
 
         return "Account id: " + id + '\n' +
                 "Name: " + name + '\n' +
                 "Email: " + email + '\n' +
-                "Balance: " + overDraftWarning;
+                "Balance: $" + overDraftWarning;
     }
 }

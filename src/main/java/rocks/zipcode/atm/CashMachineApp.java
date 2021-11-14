@@ -17,28 +17,11 @@ import javafx.scene.layout.FlowPane;
  */
 public class CashMachineApp extends Application {
 
-    //Constructors available:
-//new Color color(double red, double green, double blue);
-
-//Static functions available:
-//Color.rgb(int red, int green, int blue, double opacity);
-//Color.rgb(int red, int green, int blue);
-//
-//Color.hsb(double hue, double saturation, double brightness, double opacity);
-//Color.hsb(double hue, double saturation, double brightness);
-//
-//Color.web(String colorString, double opacity);
-//Color.web(String colorString);
-
-//CashMachineApp.setFill(Color.web("#81c483"));
-
 
     private TextField accountIdField = new TextField();
     private TextField depositField = new TextField();
     private TextField withdrawField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
-
-
 
 
     private Parent createContent() {
@@ -53,7 +36,7 @@ public class CashMachineApp extends Application {
         withdrawField.setPromptText("Enter withdraw amount");
 
         // button creations
-        Button btnLogin = new Button("Set Account ID");
+        Button btnLogin = new Button("Enter Account ID");
         Button btnDeposit = new Button("Deposit");
         Button btnWithdraw = new Button("Withdraw");
         Button btnExit = new Button("Logout");
@@ -107,7 +90,6 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-
         // creation of flowpane
         FlowPane flowpane = new FlowPane();
 
@@ -143,20 +125,12 @@ public class CashMachineApp extends Application {
         stage.show();                                                       // this shows the larger stage window
     }
 
-
     // method to clear all text fields--can call whenever needed
     public void clearTextFields() {
         accountIdField.clear();
         depositField.clear();
         withdrawField.clear();
     }
-
-//    public void disableButtons() {
-//        btnLogin.setDisable(false);
-//        btnDeposit.setDisable(true);
-//        btnWithdraw.setDisable(true);
-//        btnExit.setDisable(true);
-//    }
 
     public static void main(String[] args) {
         launch(args);                                                           // this launches the app
