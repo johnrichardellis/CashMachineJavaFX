@@ -37,6 +37,7 @@ public final class AccountData {
     @Override
     public String toString() {                                                      // converting account set up to strings
        String overDraftWarning = balance + "";
+
        if (balance < 0) {
            return  "You need more money! Your account is overdrawn." + '\n' +
                    "Account id: " + id + '\n' +

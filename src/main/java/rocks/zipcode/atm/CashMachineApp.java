@@ -17,6 +17,20 @@ import javafx.scene.layout.FlowPane;
  */
 public class CashMachineApp extends Application {
 
+    //Constructors available:
+//new Color color(double red, double green, double blue);
+
+//Static functions available:
+//Color.rgb(int red, int green, int blue, double opacity);
+//Color.rgb(int red, int green, int blue);
+//
+//Color.hsb(double hue, double saturation, double brightness, double opacity);
+//Color.hsb(double hue, double saturation, double brightness);
+//
+//Color.web(String colorString, double opacity);
+//Color.web(String colorString);
+
+//CashMachineApp.setFill(Color.web("#81c483"));
 
 
     private TextField accountIdField = new TextField();
@@ -24,9 +38,6 @@ public class CashMachineApp extends Application {
     private TextField withdrawField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
-    public void disableButtons() {
-
-    }
 
 
 
@@ -36,30 +47,29 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
+        // default text appearing in the text fields
+        accountIdField.setPromptText("Enter Account ID");
+        depositField.setPromptText(("Enter deposit amount"));
+        withdrawField.setPromptText("Enter withdraw amount");
 
-
-
-//        Button btnLogin = new Button("Please Login");
-        Button btnSubmit = new Button("Set Account ID");
+        // button creations
+        Button btnLogin = new Button("Set Account ID");
         Button btnDeposit = new Button("Deposit");
         Button btnWithdraw = new Button("Withdraw");
         Button btnExit = new Button("Logout");
 
-//        btnLogin.setDisable(false);
-        btnSubmit.setDisable(false);
+        // setting initial states for buttons
+        btnLogin.setDisable(false);
         btnDeposit.setDisable(true);
         btnWithdraw.setDisable(true);
         btnExit.setDisable(true);
 
 
-
-        // account ID button
-        // button disabled on startup
-
-        btnSubmit.setOnAction(e -> {
+        // account ID button    // button disabled on startup
+        btnLogin.setOnAction(e -> {
             int id = Integer.parseInt(accountIdField.getText());
             cashMachine.login(id);
-            btnSubmit.setDisable(true);
+            btnLogin.setDisable(true);
             btnDeposit.setDisable(false);
             btnWithdraw.setDisable(false);
             btnExit.setDisable(false);
@@ -68,9 +78,7 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        // deposit button
-        // button disabled on startup
-
+        // deposit button   // button disabled on startup
         btnDeposit.setOnAction(e -> {
             Float amount = Float.parseFloat(depositField.getText());
             cashMachine.deposit(amount);
@@ -78,39 +86,33 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        // withdraw button
-        // button disabled on startup
-
+        // withdraw button  // button disabled on startup
         btnWithdraw.setOnAction(e -> {
             Float amount = Float.parseFloat(withdrawField.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
-
         });
 
-        // Logout button
-        // button disabled on startup
-
+        // Logout button    // button disabled on startup
         btnExit.setOnAction(e -> {
             cashMachine.exit();
-            btnSubmit.setDisable(false);
+            btnLogin.setDisable(false);
             btnDeposit.setDisable(true);
             btnWithdraw.setDisable(true);
             btnExit.setDisable(true);
             clearTextFields();
-
+//            disableButtons();
 
             areaInfo.setText(cashMachine.toString());
         });
 
 
-
+        // creation of flowpane
         FlowPane flowpane = new FlowPane();
 
-
-        // these are all the buttons included in this program to program
-        flowpane.getChildren().add(btnSubmit);
+        // adding buttons to flowpane
+        flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
@@ -118,7 +120,7 @@ public class CashMachineApp extends Application {
         // these flowpanes place the text fields and buttons at the top of the window all in succession, top to bottom
         FlowPane flowPaneAccountId = new FlowPane();
         flowPaneAccountId.getChildren().add(accountIdField);                                        // top layer
-        flowPaneAccountId.getChildren().add(btnSubmit);
+        flowPaneAccountId.getChildren().add(btnLogin);
 
         FlowPane flowPaneDeposit = new FlowPane();
         flowPaneDeposit.getChildren().add(depositField);                                            // middle layer
@@ -127,7 +129,6 @@ public class CashMachineApp extends Application {
         FlowPane flowPaneWithdraw = new FlowPane();
         flowPaneWithdraw.getChildren().add(withdrawField);                                          // bottom layer
         flowPaneWithdraw.getChildren().add(btnWithdraw);
-
 
 
         // the vbox is the virtualbox, and added are the following parameters
@@ -148,10 +149,16 @@ public class CashMachineApp extends Application {
         accountIdField.clear();
         depositField.clear();
         withdrawField.clear();
-
     }
 
+//    public void disableButtons() {
+//        btnLogin.setDisable(false);
+//        btnDeposit.setDisable(true);
+//        btnWithdraw.setDisable(true);
+//        btnExit.setDisable(true);
+//    }
+
     public static void main(String[] args) {
-        launch(args);
-    }               // this launches the app
+        launch(args);                                                           // this launches the app
+    }
 }
