@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class CashMachineApp extends Application {
 
-
+    // creating text fields
     private TextField accountIdField = new TextField();
     private TextField depositField = new TextField();
     private TextField withdrawField = new TextField();
@@ -31,6 +31,7 @@ public class CashMachineApp extends Application {
     private Parent createContent() {
         VBox vbox = new VBox(10);                               // gray spacing around the buttons
         vbox.setPrefSize(500, 400);                 // window size 600x600 default
+        vbox.setStyle("-fx-background-color:#CECECE");                  // background color
 
 
         TextArea areaInfo = new TextArea();
@@ -48,7 +49,7 @@ public class CashMachineApp extends Application {
         depositField.setPromptText(("Enter deposit amount"));
         withdrawField.setPromptText("Enter withdraw amount");
 
-        // button creations
+        // creating buttons
         Button btnLogin = new Button("Account ID");
         Button btnDeposit = new Button("Deposit");
         Button btnWithdraw = new Button("Withdraw");
