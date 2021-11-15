@@ -30,17 +30,17 @@ public class CashMachineApp extends Application {
 
     private Parent createContent() {
         VBox vbox = new VBox(10);                               // gray spacing around the buttons
-        vbox.setPrefSize(500, 300);                 // window size 600x600 default
+        vbox.setPrefSize(500, 400);                 // window size 600x600 default
 
 
         TextArea areaInfo = new TextArea();
 
         // new combobox creation
-        ComboBox cb = new ComboBox();
+        ComboBox<Account> cb = new ComboBox();
 
         // iterating through a map
-        for (Map.Entry <Integer, Account> accountEntry : cashMachine.getBank().getAccounts().entrySet()) {
-            cb.getItems().add(accountEntry);
+        for (Map.Entry <Integer, Account> accountEntry : cashMachine.getBank().getAccounts().entrySet()) {  // going through and getting the actual value and that is  what is being put in so it should only show the actual account
+            cb.getItems().add(accountEntry.getValue());
         }
 
         // default text appearing in the text fields
@@ -59,17 +59,21 @@ public class CashMachineApp extends Application {
         btnDeposit.setDisable(true);
         btnWithdraw.setDisable(true);
         btnExit.setDisable(true);
+        cb.setDisable(true);
 
 
-        cb.setOnAction(event -> {
+
+        cb.setOnAction(e -> {
 //            int selectedIndex = cb.getSelectionModel().getSelectedIndex();
-            Account selectedItem = (Account)cb.getSelectionModel().getSelectedItem();
+            Account selectedItem = cb.getSelectionModel().getSelectedItem();
+
             cashMachine.login(selectedItem.getAccountData().getId());
-            btnLogin.setDisable(true);
+            btnLogin.setDisable(false);
             btnDeposit.setDisable(false);
             btnWithdraw.setDisable(false);
             btnExit.setDisable(false);
-
+            cb.setDisable(false);
+            accountIdField.setText(String.valueOf(selectedItem.getAccountData().getId()));
 
             areaInfo.setText(cashMachine.toString());
         });
@@ -83,6 +87,7 @@ public class CashMachineApp extends Application {
             btnDeposit.setDisable(false);
             btnWithdraw.setDisable(false);
             btnExit.setDisable(false);
+            cb.setDisable(false);
 
 
             areaInfo.setText(cashMachine.toString());
@@ -111,6 +116,8 @@ public class CashMachineApp extends Application {
             btnDeposit.setDisable(true);
             btnWithdraw.setDisable(true);
             btnExit.setDisable(true);
+            cb.setDisable(true);
+
             clearTextFields();
 
 
@@ -148,7 +155,7 @@ public class CashMachineApp extends Application {
 
         // the vbox is the virtualbox, and added are the following parameters
         // this is what will be shown on the virtualbox
-        vbox.getChildren().addAll(flowPaneAccountId, flowPaneDeposit, flowPaneWithdraw, flowPaneComboBox, flowpane, areaInfo);
+        vbox.getChildren().addAll(flowPaneComboBox, flowPaneAccountId, flowPaneDeposit, flowPaneWithdraw, flowpane, areaInfo);
         return vbox;
     }
 

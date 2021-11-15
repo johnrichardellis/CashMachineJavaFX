@@ -3,6 +3,8 @@ package rocks.zipcode.atm.bank;
 /**
  * @author ZipCodeWilmington
  */
+
+
 public final class AccountData {
 
     private final int id;
