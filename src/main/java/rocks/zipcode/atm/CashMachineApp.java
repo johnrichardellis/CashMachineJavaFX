@@ -1,20 +1,24 @@
 package rocks.zipcode.atm;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
+import rocks.zipcode.atm.bank.Account;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.FlowPane;
+
+import java.util.Map;
 
 /**
  * @author ZipCodeWilmington
  */
+
 public class CashMachineApp extends Application {
 
 
@@ -28,7 +32,16 @@ public class CashMachineApp extends Application {
         VBox vbox = new VBox(10);                               // gray spacing around the buttons
         vbox.setPrefSize(500, 300);                 // window size 600x600 default
 
+
         TextArea areaInfo = new TextArea();
+
+        // new combobox creation
+        ComboBox cb = new ComboBox();
+
+        // iterating through a map
+        for (Map.Entry <Integer, Account> accountEntry : cashMachine.getBank().getAccounts().entrySet()) {
+            cb.getItems().add(accountEntry);
+        }
 
         // default text appearing in the text fields
         accountIdField.setPromptText("Enter Account ID");
@@ -36,7 +49,7 @@ public class CashMachineApp extends Application {
         withdrawField.setPromptText("Enter withdraw amount");
 
         // button creations
-        Button btnLogin = new Button("Enter Account ID");
+        Button btnLogin = new Button("Account ID");
         Button btnDeposit = new Button("Deposit");
         Button btnWithdraw = new Button("Withdraw");
         Button btnExit = new Button("Logout");
@@ -48,7 +61,21 @@ public class CashMachineApp extends Application {
         btnExit.setDisable(true);
 
 
-        // account ID button    // button disabled on startup
+        cb.setOnAction(event -> {
+//            int selectedIndex = cb.getSelectionModel().getSelectedIndex();
+            Account selectedItem = (Account)cb.getSelectionModel().getSelectedItem();
+            cashMachine.login(selectedItem.getAccountData().getId());
+            btnLogin.setDisable(true);
+            btnDeposit.setDisable(false);
+            btnWithdraw.setDisable(false);
+            btnExit.setDisable(false);
+
+
+            areaInfo.setText(cashMachine.toString());
+        });
+
+
+        // account ID button    // button enabled on startup
         btnLogin.setOnAction(e -> {
             int id = Integer.parseInt(accountIdField.getText());
             cashMachine.login(id);
@@ -85,7 +112,7 @@ public class CashMachineApp extends Application {
             btnWithdraw.setDisable(true);
             btnExit.setDisable(true);
             clearTextFields();
-//            disableButtons();
+
 
             areaInfo.setText(cashMachine.toString());
         });
@@ -94,6 +121,7 @@ public class CashMachineApp extends Application {
         FlowPane flowpane = new FlowPane();
 
         // adding buttons to flowpane
+        flowpane.getChildren().add(cb); // added combobox dropdown
         flowpane.getChildren().add(btnLogin);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
@@ -112,10 +140,15 @@ public class CashMachineApp extends Application {
         flowPaneWithdraw.getChildren().add(withdrawField);                                          // bottom layer
         flowPaneWithdraw.getChildren().add(btnWithdraw);
 
+        FlowPane flowPaneComboBox = new FlowPane();
+        flowPaneComboBox.getChildren().add(cb);
+
+
+
 
         // the vbox is the virtualbox, and added are the following parameters
         // this is what will be shown on the virtualbox
-        vbox.getChildren().addAll(flowPaneAccountId, flowPaneDeposit, flowPaneWithdraw, flowpane, areaInfo);
+        vbox.getChildren().addAll(flowPaneAccountId, flowPaneDeposit, flowPaneWithdraw, flowPaneComboBox, flowpane, areaInfo);
         return vbox;
     }
 
@@ -131,6 +164,10 @@ public class CashMachineApp extends Application {
         depositField.clear();
         withdrawField.clear();
     }
+
+
+
+
 
     public static void main(String[] args) {
         launch(args);                                                           // this launches the app

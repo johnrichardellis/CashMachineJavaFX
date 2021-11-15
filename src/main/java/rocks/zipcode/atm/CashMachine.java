@@ -53,6 +53,10 @@ public class CashMachine {
         }
     }
 
+    public Bank getBank() {
+        return bank;
+    }
+
     @Override
     public String toString() {
         return accountData != null ? accountData.toString() : "You are logged out. \n \nPlease enter a valid account ID number.";

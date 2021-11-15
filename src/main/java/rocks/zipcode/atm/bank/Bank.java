@@ -66,4 +66,8 @@ public class Bank {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
         }
     }
+
+    public Map<Integer, Account> getAccounts() {
+        return this.accounts;
+    }
 }
