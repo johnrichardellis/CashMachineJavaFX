@@ -25,6 +25,7 @@ public class CashMachineApp extends Application {
     private TextField accountIdField = new TextField();
     private TextField depositField = new TextField();
     private TextField withdrawField = new TextField();
+
     private CashMachine cashMachine = new CashMachine(new Bank());
 
 
@@ -36,7 +37,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-        // new combobox creation
+        // new combobox creation (dropdown)
         ComboBox<Account> cb = new ComboBox();
 
         // iterating through a map
@@ -63,9 +64,8 @@ public class CashMachineApp extends Application {
         cb.setDisable(true);
 
 
-
+        // dropdown account id box
         cb.setOnAction(e -> {
-//            int selectedIndex = cb.getSelectionModel().getSelectedIndex();
             Account selectedItem = cb.getSelectionModel().getSelectedItem();
 
             cashMachine.login(selectedItem.getAccountData().getId());
